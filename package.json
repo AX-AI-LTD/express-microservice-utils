@@ -1,6 +1,6 @@
 {
   "name": "express-microservice-utils",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "index.js",
   "scripts": {
     "test": "vitest"
@@ -17,7 +17,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "cross-fetch": "^4.0.0",
-    "fetch-retry": "^6.0.0"
+    "axios": "^1.6.8",
+    "axios-retry": "^4.1.0"
   }
 }
