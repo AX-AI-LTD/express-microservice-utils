@@ -17,7 +17,7 @@ npm install express-microservices-utils
 The axios instance rejects promises when errors occur, allowing for await to throw in a try catch setup
 
 ```js
-const axios = require("express-microservice-utils");
+const { axios } = require("express-microservice-utils");
 
 // ...
 
@@ -35,7 +35,7 @@ try {
 The axiosHandled instance resolves promises with an {ok:false} object when errors occur, meaning that await will not throw
 
 ```js
-const axiosHandled = require("express-microservice-utils");
+const { axiosHandled } = require("express-microservice-utils");
 
 // ...
 
@@ -45,6 +45,17 @@ if (!result.ok) {
 }
 doStuff(result);
 return { ok: true };
+```
+
+### CustomError class
+
+```js
+const { CustomError } = require("express-microservice-utils");
+
+// ...
+
+// Throw a custom Error that inherits from the native Error but includes a status code
+throw new CustomError({ message: "Could not find file", status: 404 });
 ```
 
 ## Contributing
