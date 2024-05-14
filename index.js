@@ -1,7 +1,5 @@
 const CustomError = require("./src/CustomError");
-const fetch = require("./src/fetch");
-const handledFetch = require("./src/handledFetch");
+const { axios, axiosHandled } = require("./src/axiosInstances");
+const axiosInstance = require("./src/createAxios");
 
-const { fetchConfig } = fetch;
-
-module.exports = { fetch, fetchConfig, handledFetch, CustomError };
+module.exports = { axios, axiosHandled, CustomError };

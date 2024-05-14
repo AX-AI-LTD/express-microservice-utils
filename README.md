@@ -12,34 +12,39 @@ npm install express-microservices-utils
 
 ## Usage
 
-### Manual fetching
+### custom axios instance
+
+The axios instance rejects promises when errors occur, allowing for await to throw in a try catch setup
 
 ```js
-const { fetch, fetchConfig } = require("express-microservice-utils");
+const axios = require("express-microservice-utils");
 
-// Create the options object
-const options = fetchConfig({ method: "POST", body: {} });
+// ...
 
-// Make a fetch request
-fetch("https://api.example.com/upload/cats", options)
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error));
+try {
+  const result = await axios.get("someURL");
+  doStuff(result);
+  return { ok: true };
+} catch (err) {
+  return { ok: false, reason: err.message, status: err.response?.status };
+}
 ```
 
-### Handled Fetch
+### axiosHandled instance
+
+The axiosHandled instance resolves promises with an {ok:false} object when errors occur, meaning that await will not throw
 
 ```js
-const { handledFetch } = require("express-microservice-utils");
+const axiosHandled = require("express-microservice-utils");
 
-// Make a fetch request with response handling, rejecting non 2xx statuses and calling .json() on ok responses
-const catData = await handledFetch({
-  url: "https://api.example.com/data/cats",
-  method: "GET",
-  errMessage: "Could not GET cats data",
-});
+// ...
 
-console.log(catData.furColour);
+const result = await axiosHandled.get("someURL");
+if (!result.ok) {
+  return result;
+}
+doStuff(result);
+return { ok: true };
 ```
 
 ## Contributing
