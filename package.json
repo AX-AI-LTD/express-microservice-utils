@@ -7,11 +7,11 @@
   },
   "license": "MIT",
   "description": "A collection of simple utilities for an express microservice architecture",
-  "author": "damon314159",
-  "homepage": "https://github.com/damon314159/express-microservice-utils",
+  "author": "damon314159 (https://github.com/damon314159)",
+  "homepage": "https://https://github.com/AX-AI-LTD/express-microservice-utils",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/damon314159/express-microservice-utils.git"
+    "url": "git+https://https://github.com/AX-AI-LTD/express-microservice-utils.git"
   },
   "devDependencies": {
     "vitest": "^1.6.0"
