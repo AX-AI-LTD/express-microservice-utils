@@ -26,7 +26,7 @@ axios.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx causes this function to trigger
     console.error(
       `${new Date().toISOString()}: Error response with ${error} and status ${
-        error.response.status
+        error.response?.status
       }`
     );
     return Promise.reject(error);
@@ -59,10 +59,10 @@ axiosHandled.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx causes this function to trigger
     console.error(
       `${new Date().toISOString()}: Error response with ${error} and status ${
-        error.response.status
+        error.response?.status
       }`
     );
-    return { ok: false, reason: error.message, status: error.response.status };
+    return { ok: false, reason: error.message, status: error.response?.status };
   }
 );
 
