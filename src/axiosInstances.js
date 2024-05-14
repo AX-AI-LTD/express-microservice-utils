@@ -46,7 +46,7 @@ axiosHandled.interceptors.request.use(
     console.error(
       `${new Date().toISOString()}: Setting up request errored with ${error}`
     );
-    return { ok: false, reason: error.message };
+    return { data: { ok: false, reason: error.message } };
   }
 );
 // Response interceptor
@@ -62,7 +62,13 @@ axiosHandled.interceptors.response.use(
         error.response?.status
       }`
     );
-    return { ok: false, reason: error.message, status: error.response?.status };
+    return {
+      data: {
+        ok: false,
+        reason: error.message,
+        status: error.response?.status,
+      },
+    };
   }
 );
 

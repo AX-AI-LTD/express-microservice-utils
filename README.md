@@ -23,7 +23,7 @@ const { axios } = require("express-microservice-utils");
 
 try {
   const result = await axios.get("someURL");
-  doStuff(result);
+  doStuff(result.data);
   return { ok: true };
 } catch (err) {
   return { ok: false, reason: err.message, status: err.response?.status };
@@ -40,10 +40,10 @@ const { axiosHandled } = require("express-microservice-utils");
 // ...
 
 const result = await axiosHandled.get("someURL");
-if (!result.ok) {
-  return result;
+if (result.data?.ok === false) {
+  return result.data;
 }
-doStuff(result);
+doStuff(result.data);
 return { ok: true };
 ```
 
