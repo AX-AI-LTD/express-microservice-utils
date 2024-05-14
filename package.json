@@ -1,0 +1,23 @@
+{
+  "name": "express-microservice-utils",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "license": "MIT",
+  "description": "A collection of simple utilities for an express microservice architecture",
+  "author": "damon314159",
+  "homepage": "https://github.com/damon314159/express-microservice-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damon314159/express-microservice-utils.git"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "cross-fetch": "^4.0.0",
+    "fetch-retry": "^6.0.0"
+  }
+}
