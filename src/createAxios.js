@@ -15,7 +15,7 @@ const createInstance = () => {
     retryCondition: (error) =>
       // Retry on network errors, or 503 codes, or any 5xx code for idempotent methods
       axiosRetry.isNetworkOrIdempotentRequestError(error) ||
-      [503].includes(error.response.status),
+      [503].includes(error.response?.status),
   });
 
   return axiosInstance;
