@@ -1,5 +1,10 @@
 const CustomError = require("./src/CustomError");
 const { axios, axiosHandled } = require("./src/axiosInstances");
-const axiosInstance = require("./src/createAxios");
+const generateAxiosErrorSummary = require("./src/generateAxiosErrorSummary");
 
-module.exports = { axios, axiosHandled, CustomError };
+module.exports = {
+  axios,
+  axiosHandled,
+  CustomError,
+  generateAxiosErrorSummary,
+};
