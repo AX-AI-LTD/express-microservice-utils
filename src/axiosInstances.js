@@ -1,4 +1,5 @@
 const createInstance = require("./createAxios");
+const generateAxiosErrorSummary = require("./generateAxiosErrorSummary");
 
 // An axios instance using regular promises to reject on errors
 const axios = createInstance();
@@ -8,12 +9,10 @@ axios.interceptors.request.use(
     // Any logic before request is sent
     return config;
   },
-  (error) => {
+  (err) => {
     // Do something with request error
-    console.error(
-      `${new Date().toISOString()}: Setting up request errored with ${error}`
-    );
-    return Promise.reject(error);
+    console.error(generateAxiosErrorSummary(err));
+    return Promise.reject(err);
   }
 );
 // Response interceptor
@@ -22,14 +21,10 @@ axios.interceptors.response.use(
     // Any status code that lies within the range of 2xx causes this function to trigger
     return response;
   },
-  (error) => {
+  (err) => {
     // Any status codes that falls outside the range of 2xx causes this function to trigger
-    console.error(
-      `${new Date().toISOString()}: Error response with ${error} and status ${
-        error.response?.status
-      }`
-    );
-    return Promise.reject(error);
+    console.error(generateAxiosErrorSummary(err));
+    return Promise.reject(err);
   }
 );
 
@@ -41,12 +36,13 @@ axiosHandled.interceptors.request.use(
     // Any logic before request is sent
     return config;
   },
-  (error) => {
+  (err) => {
     // Do something with request error
-    console.error(
-      `${new Date().toISOString()}: Setting up request errored with ${error}`
-    );
-    return { data: { ok: false, reason: error.message } };
+    const message = generateAxiosErrorSummary(err);
+    console.error(message);
+    return {
+      data: { ok: false, reason: message, status: err.response?.status },
+    };
   }
 );
 // Response interceptor
@@ -55,19 +51,12 @@ axiosHandled.interceptors.response.use(
     // Any status code that lies within the range of 2xx causes this function to trigger
     return response;
   },
-  (error) => {
+  (err) => {
     // Any status codes that falls outside the range of 2xx causes this function to trigger
-    console.error(
-      `${new Date().toISOString()}: Error response with ${error} and status ${
-        error.response?.status
-      }`
-    );
+    const message = generateAxiosErrorSummary(err);
+    console.error(message);
     return {
-      data: {
-        ok: false,
-        reason: error.message,
-        status: error.response?.status,
-      },
+      data: { ok: false, reason: message, status: err.response?.status },
     };
   }
 );
