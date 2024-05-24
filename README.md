@@ -7,7 +7,7 @@ A collection of simple utilities written for an express microservice architectur
 You can install the package via npm:
 
 ```bash
-npm install express-microservices-utils
+npm install @axai/express-microservice-utils
 ```
 
 ## Usage
