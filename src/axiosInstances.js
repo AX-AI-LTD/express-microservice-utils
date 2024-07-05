@@ -11,9 +11,13 @@ axios.interceptors.request.use(
   },
   (err) => {
     // Do something with request error
-    console.error(generateAxiosErrorSummary(err));
+    const message = generateAxiosErrorSummary(err);
+    if (process?.env?.AXAI_UTILS_LOG) {
+      console.error(message);
+    }
+    err.summary = message;
     return Promise.reject(err);
-  }
+  },
 );
 // Response interceptor
 axios.interceptors.response.use(
@@ -23,10 +27,14 @@ axios.interceptors.response.use(
   },
   (err) => {
     // Any status codes that falls outside the range of 2xx causes this function to trigger
-    console.error(generateAxiosErrorSummary(err));
+    const message = generateAxiosErrorSummary(err);
+    if (process?.env?.AXAI_UTILS_LOG) {
+      console.error(message);
+    }
+    err.summary = message;
     err.status ??= err.response?.status;
     return Promise.reject(err);
-  }
+  },
 );
 
 // An axios instance that instead returns an ok:false object instead of rejecting
@@ -40,11 +48,19 @@ axiosHandled.interceptors.request.use(
   (err) => {
     // Do something with request error
     const message = generateAxiosErrorSummary(err);
-    console.error(message);
+    if (process?.env?.AXAI_UTILS_LOG) {
+      console.error(message);
+    }
     return {
-      data: { ok: false, reason: message, status: err.response?.status },
+      data: {
+        ok: false,
+        reason: err.message,
+        status: err.response?.status,
+        error: err,
+        summary: message,
+      },
     };
-  }
+  },
 );
 // Response interceptor
 axiosHandled.interceptors.response.use(
@@ -55,11 +71,19 @@ axiosHandled.interceptors.response.use(
   (err) => {
     // Any status codes that falls outside the range of 2xx causes this function to trigger
     const message = generateAxiosErrorSummary(err);
-    console.error(message);
+    if (process?.env?.AXAI_UTILS_LOG) {
+      console.error(message);
+    }
     return {
-      data: { ok: false, reason: message, status: err.response?.status },
+      data: {
+        ok: false,
+        reason: err.message,
+        status: err.response?.status,
+        error: err,
+        summary: message,
+      },
     };
-  }
+  },
 );
 
 module.exports.axios = axios;
