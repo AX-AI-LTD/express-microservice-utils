@@ -7,7 +7,9 @@ const axios = createInstance();
 axios.interceptors.request.use(
   (config) => {
     // Any logic before request is sent
-    return config;
+    const configToReturn = config;
+    if (config.data?.timeout) configToReturn.timeout = config.data.timeout;
+    return configToReturn;
   },
   (err) => {
     // Do something with request error
@@ -43,7 +45,9 @@ const axiosHandled = createInstance();
 axiosHandled.interceptors.request.use(
   (config) => {
     // Any logic before request is sent
-    return config;
+    const configToReturn = config;
+    if (config.data?.timeout) configToReturn.timeout = config.data.timeout;
+    return configToReturn;
   },
   (err) => {
     // Do something with request error
