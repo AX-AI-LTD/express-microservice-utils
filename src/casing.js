@@ -10,4 +10,4 @@ const camelToKebab = (str) =>
     (_, lower, upper) => `${lower}-${upper.toLowerCase()}`,
   );
 
-export { capitaliseFirst, kebabToCamel, camelToKebab };
+module.exports = { capitaliseFirst, kebabToCamel, camelToKebab };

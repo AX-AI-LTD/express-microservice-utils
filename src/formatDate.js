@@ -16,4 +16,9 @@ const formatDateText = (timestamp) => new Date(timestamp).toDateString();
 const toDatePicker = (timestamp) =>
   new Date(timestamp).toISOString().split("T")[0];
 
-export { formatDateText, formatDateNumbers, formatDateDashed, toDatePicker };
+module.exports = {
+  formatDateText,
+  formatDateNumbers,
+  formatDateDashed,
+  toDatePicker,
+};
