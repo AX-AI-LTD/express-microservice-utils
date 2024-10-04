@@ -6,4 +6,4 @@ const poundsWithCommas = (number) =>
       (_, digits) => `,${digits}`,
     )}`;
 
-export { poundsWithCommas };
+module.exports = { poundsWithCommas };
