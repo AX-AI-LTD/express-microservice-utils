@@ -13,4 +13,4 @@ const filterNullEntries = (obj) =>
     Object.entries(obj).filter(([, v]) => v !== null && v !== undefined),
   );
 
-export default filterNullEntries;
+module.exports = filterNullEntries;
