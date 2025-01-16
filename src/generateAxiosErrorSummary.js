@@ -1,5 +1,7 @@
 const genDebugSummary = (err) => `------
 ERROR @ ${new Date().toISOString()}: 
+UUID: ${err.config?.headers?.UUID}
+Sent at: ${err.config?.headers?.SentAt}
 Error: ${err.message}
 Method/URL: ${(err.config?.method ?? "").toUpperCase()} ${err.config?.url}
 RequestData: ${err.config?.data}${
