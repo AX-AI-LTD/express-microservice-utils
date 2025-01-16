@@ -12,10 +12,11 @@ const createInstance = () => {
   axiosRetry(axiosInstance, {
     retries: 4,
     retryDelay: axiosRetry.exponentialDelay,
+    shouldResetTimeout: true,
     retryCondition: (error) =>
-      // Retry on network errors, or 503 codes, or any 5xx code for idempotent methods
-      axiosRetry.isNetworkOrIdempotentRequestError(error) ||
-      [503].includes(error.response?.status),
+      error.code === 'ECONNABORTED' || // Timeouts
+      axiosRetry.isNetworkOrIdempotentRequestError(error) || // Network errors
+      [503].includes(error.response?.status), // Particular status codes
   });
 
   return axiosInstance;
