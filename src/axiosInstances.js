@@ -8,8 +8,8 @@ const axios = createInstance();
 axios.interceptors.request.use(
   (config) => {
     // Any logic before request is sent
-    config.headers.UUID = uuidv4();
-    config.headers.SentAt = Date.now();
+    config.headers.Uuid ??= uuidv4();
+    config.headers['Sent-At'] = Date.now();
     return config;
   },
   (err) => {
@@ -46,8 +46,8 @@ const axiosHandled = createInstance();
 axiosHandled.interceptors.request.use(
   (config) => {
     // Any logic before request is sent
-    config.headers.UUID = uuidv4();
-    config.headers.SentAt = Date.now();
+    config.headers.Uuid ??= uuidv4();
+    config.headers['Sent-At'] = Date.now();
     return config;
   },
   (err) => {
