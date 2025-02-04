@@ -16,7 +16,7 @@
     "url": "git+https://https://github.com/AX-AI-LTD/express-microservice-utils.git"
   },
   "devDependencies": {
-    "vitest": "^2.0.1"
+    "vitest": "^3.0.5"
   },
   "dependencies": {
     "axios": "^1.7.7",
